@@ -1,0 +1,44 @@
+
+
+
+
+
+/* content.js news cards */
+
+.articles-class{
+    width: 600px;
+    height: auto;
+    border: 2px solid black;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.article-image-container{
+    flex-basis: 40%;
+    width: 200px;
+}
+
+.article-image{
+    width: 200px;
+    height: 100px;
+    padding: 2px
+}
+
+a:link{
+    text-decoration: none;
+    color: black;
+}
+
+.article-text{
+    padding: 10px;
+    
+}
+
+.article-title{
+    font-size: 16px;
+}
+
+.article-description{
+    font-size: 12px;
+}
