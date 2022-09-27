@@ -1,9 +1,67 @@
 // Content page of web application
 
+// different categories
+// currency - https://www.commodities-api.com/api/symbols?access_key= API_KEY
+//https://www.commodities-api.com/api/latest? access_key = API_KEY& base = USD& symbols = GBP,JPY,EUR
+const currencyObj = {
+    USD: "UNITED STATES DOLLAR",
+    EUR: "EURO",
+    AUD: "AUSTRALIAN DOLLAR",
+    JPY: "JAPANESE YEN",
+    GBP: "POUND STERLING",
+    CAD: "CANADIAN DOLLAR",
+    CHF: "SWISS FRANC",
+}
+
+// cryptocurrency
+const cryptoObj = {
+    BTC: "BITCOIN",
+    ETH: "ETHERIUM",
+    LTC: "LITECOIN",
+    BCH: "BITCOIN CASH",
+    ADA: "CARDANO",
+    LINK: "CHAINLINK",
+}
+
+// consumables
+const consumablesObj = {
+    RICE: "RICE",
+    COFFEE: "ARABICA COFFEE",
+    ROBUSTA: "ROBUSTA COFFEE",
+    CSCU22: "CHEESE",
+    COCOA: "COCOA",
+    CORN: "CORN",
+    DCU22: "MILK",
+    OAT: "OATS",
+}
+
+// metals
+const metalsObj = {
+    XAU: "GOLD (TROY OUNCE)",
+    XAG: "SILVER (TROY OUNCE",
+    XCU: "COPPER",
+    ALU: "ALUMINIUM",
+    IRD: "IRIDIUM (TROY OUNCE)",
+    NI: "NICKEL",
+    XPD: "PALLADIUM (TROY OUNCE)",
+}
+
+// resources
+const resourcesObj = {
+    HOU22: "HEATING OIL",
+    CPO: "CRUDE PALM OIL",
+    NG: "NATURAL GAS",
+    CANO: "CANOLA",
+    COAL: "COAL",
+    ETHANOL: "ETHANOL",
+    LUMBER: "LUMBER",
+    LCAT: "LIVE CATTLE",
+}
+
 
 // commodity prices card
-
-
+const comContainer = $('.commodity-prices-card');
+const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";
 // create search bar
 // use the search bar to run through the array selected on the landing page
 // create a search button next to the input button
