@@ -2,7 +2,7 @@
 
 // different categories
 // currency - https://www.commodities-api.com/api/symbols?access_key= API_KEY
-//https://www.commodities-api.com/api/latest? access_key = API_KEY& base = USD& symbols = GBP,JPY,EUR
+// https://www.commodities-api.com/api/latest? access_key = API_KEY& base = USD& symbols = GBP,JPY,EUR
 const currencyObj = {
     USD: "UNITED STATES DOLLAR",
     EUR: "EURO",
@@ -58,13 +58,18 @@ const resourcesObj = {
     LCAT: "LIVE CATTLE",
 }
 
+// when URL is sent from landing page, collect and break down the data
+// find the category that is sent over from the previous URL
+// match the category send from the url to to one of our categories above
+// run the categorie collected into the API URL
+// log this into console log
+// pull from the API and paste and paste on the screen
 
 // commodity prices card
 const comContainer = $('.commodity-prices-card');
 const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";
 // create search bar
 // use the search bar to run through the array selected on the landing page
-// create a search button next to the input button
 // when you type a commodity price in and click search...
 // if the searched name does not match a commodity name
 // inner html of input bar notifies the user that the commodity was not found
