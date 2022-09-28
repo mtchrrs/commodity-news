@@ -14,7 +14,7 @@ const currencyObj = {
 }
 
 // cryptocurrency
-const cryptoObj = {
+const cryptocurrencyObj = {
     BTC: "BITCOIN",
     ETH: "ETHERIUM",
     LTC: "LITECOIN",
@@ -60,14 +60,99 @@ const resourcesObj = {
 
 // when URL is sent from landing page, collect and break down the data
 // find the category that is sent over from the previous URL
-// match the category send from the url to to one of our categories above
-// run the categorie collected into the API URL
-// log this into console log
-// pull from the API and paste and paste on the screen
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
 
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+    return false;
+};
+
+//send a get request to the commodities API and return an array of commodities and their prices
 // commodity prices card
 const comContainer = $('.commodity-prices-card');
 const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";
+function getCommodityPrices(categoryObj)
+{
+    var commodityAPIURL = "https://www.commodities-api.com/api/latest?access_key=" + comAPIKey
+    var http = new XMLHttpRequest();
+    http.open("GET", commodityAPIURL, true);
+    http.timeout = 10000;
+    http.ontimeout = function()
+    {
+      
+    }
+    http.onerror = function()
+    {
+        
+    }
+    //http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    http.onload = function()
+    {
+        if(http.readyState==4)
+        {
+            if(http.status==200)
+            {
+                try
+                {
+                    var response = jQuery.parseJSON(http.responseText);
+                }
+                catch(e)
+                {
+                    console.log("failed to parse JSON response");
+                    return false;
+                }
+                console.log(categoryObj);
+                console.log(response.data);
+                //go through each rate returned by the API
+                //if the commodity key matches that in our categoryObj, append to the commodities card
+            }
+            //non 200 OK response
+            else
+            {
+     
+            }
+        }
+    }
+    http.send();
+}
+
+//try and get the category paramater if set
+var category = getUrlParameter("category");
+if(category)
+{
+    console.log("found the category parameter:"+category);
+    // match the category sent from the url to to one of our categories above
+    // TO DO - perform a more robust check of whether or not the category object exists
+    if(eval(category+"Obj"))
+    {
+        console.log("we have an object:");
+        // run the categorie collected into the API URL
+        getCommodityPrices(eval(category+"Obj"));
+        // log this into console log
+        // pull from the API and paste and paste on the screen
+    }
+    else
+    {
+        console.log("could not find a matching category object");
+    }
+}
+else
+{
+    console.log("could not find param");
+}
+
+
+
+
 // create search bar
 // use the search bar to run through the array selected on the landing page
 // when you type a commodity price in and click search...
