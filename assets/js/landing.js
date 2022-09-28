@@ -8,10 +8,12 @@ compareBtn.on('click', function(){
     var queryString = document.location.search; 
     var category = queryString.split('=')[1];
     console.log(category);
-    document.location.href = './commodity-news/pages/content.html?category=' + category;
+    if(category == "none"){
+        location.reload();
+    }
+    
+    var newURL = './content.html?category=' + category;
+    window.open(newURL);
+    //window.location.replace(newURL);
 });
 
-// reference pointer to category and compare button - separate variables
-// read category.value - gives value of category - document.location set to new URL
-
-// event listener on compare
