@@ -111,7 +111,8 @@ a{
 }
 .item{
     float: left;
-    width: 3rem;
+    width: 13rem;
+	text-align:left;
 }
 
 .description{
@@ -172,4 +173,7 @@ a:link{
 
 .article-description{
     font-size: 10px;
-} 
+}
+.price{
+	text-align:left;
+}
