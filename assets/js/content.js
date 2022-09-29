@@ -71,7 +71,7 @@ const categories = {
 const comContainer = $('.commodity-prices-card');
 //const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
 const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key
-const comAPIBaseCurrency = "USD";
+const comAPIBaseCurrency = "AUD";
 
 // find the category that is sent over from the previous URL
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -94,7 +94,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 function getCommodityPrices(categoryObj)
 {
 	//url of the commodities API
-	var commodityAPIURL = "https://www.commodities-api.com/api/latest?access_key="+comAPIKey+"&base="+comAPIBaseCurrency;
+	var commodityAPIURL = "https://www.commodities-api.com/api/latest?access_key="+ comAPIKey +"&base=" + comAPIBaseCurrency;
 	//run a HTTP GET request to the API and attempt to decode the JSON response
 	fetch(commodityAPIURL)
 	.then((response) => response.json()) //decode the JSON response

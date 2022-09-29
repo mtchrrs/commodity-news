@@ -14,6 +14,6 @@ compareBtn.on('click', function(){
     
     var newURL = './content.html?category=' + category;
     window.open(newURL);
-    //window.location.replace(newURL);
+    //document.location.replace('./content.html?category=' + category);
 });
 
