@@ -70,7 +70,8 @@ const categories = {
 //commodity prices card
 const comContainer = $('.commodity-prices-card');
 //const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
-const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key
+//const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key, max number of requests per month reached
+const comAPIKey = "pvbbfl57hthgd102chp2njje681xzw650igd4ct0ozpc2y1cnvwxn7c28so3"
 const comAPIBaseCurrency = "AUD";
 
 // find the category that is sent over from the previous URL
