@@ -58,7 +58,21 @@ const resourcesObj = {
     LCAT: "LIVE CATTLE",
 }
 
-// when URL is sent from landing page, collect and break down the data
+//list of valid categories
+const categories = {
+	"currency":"",
+	"cryptocurrency":"",
+	"consumables":"",
+	"metals":"",
+	"resources":"",
+}
+
+//commodity prices card
+const comContainer = $('.commodity-prices-card');
+//const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
+const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key
+const comAPIBaseCurrency = "USD";
+
 // find the category that is sent over from the previous URL
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
@@ -76,82 +90,55 @@ var getUrlParameter = function getUrlParameter(sParam) {
     return false;
 };
 
-//send a get request to the commodities API and return an array of commodities and their prices
-// commodity prices card
-const comContainer = $('.commodity-prices-card');
-const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";
+//send a get request to the commodities API and display a list of relevant commodities and their prices.
 function getCommodityPrices(categoryObj)
 {
-    var commodityAPIURL = "https://www.commodities-api.com/api/latest?access_key=" + comAPIKey
-    var http = new XMLHttpRequest();
-    http.open("GET", commodityAPIURL, true);
-    http.timeout = 10000;
-    http.ontimeout = function()
-    {
-      
-    }
-    http.onerror = function()
-    {
-        
-    }
-    //http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    http.onload = function()
-    {
-        if(http.readyState==4)
-        {
-            if(http.status==200)
-            {
-                try
-                {
-                    var response = jQuery.parseJSON(http.responseText);
-                }
-                catch(e)
-                {
-                    console.log("failed to parse JSON response");
-                    return false;
-                }
-                console.log(categoryObj);
-                console.log(response.data);
-                //go through each rate returned by the API
-                //if the commodity key matches that in our categoryObj, append to the commodities card
-            }
-            //non 200 OK response
-            else
-            {
-     
-            }
-        }
-    }
-    http.send();
+	//url of the commodities API
+	var commodityAPIURL = "https://www.commodities-api.com/api/latest?access_key="+comAPIKey+"&base="+comAPIBaseCurrency;
+	//run a HTTP GET request to the API and attempt to decode the JSON response
+	fetch(commodityAPIURL)
+	.then((response) => response.json()) //decode the JSON response
+	.then(function(data){ //process the data
+		//for each item in our category, attempt to lookup the correspoding price in the commodities API response
+		console.log("this is the API response");
+		console.log(data);
+		for(const item in categoryObj)
+		{
+			//if we find a match
+			if(item in data.data.rates)
+			{
+				//calculate the $ value by dividing by 1
+				var itemValue = (data.data.rates[item]/1).toFixed(10);
+				//console.log(item+" - "+categoryObj[item]+": "+itemValue+" "+comAPIBaseCurrency);
+				
+				//display the price on the commodity prices card
+				var newCommodity = $("<div></div>").addClass("commodity m-2");
+				newCommodity.append($("<span>"+categoryObj[item]+"</span>").addClass("item"));
+				newCommodity.append($("<span>$"+itemValue+" "+comAPIBaseCurrency+"</span>").addClass("price"));
+				comContainer.append(newCommodity);
+			}
+		}
+	});
 }
 
-//try and get the category paramater if set
+//get the category paramater if set
 var category = getUrlParameter("category");
 if(category)
 {
-    console.log("found the category parameter:"+category);
-    // match the category sent from the url to to one of our categories above
-    // TO DO - perform a more robust check of whether or not the category object exists
-    if(eval(category+"Obj"))
-    {
-        console.log("we have an object:");
-        // run the categorie collected into the API URL
-        getCommodityPrices(eval(category+"Obj"));
-        // log this into console log
-        // pull from the API and paste and paste on the screen
-    }
-    else
-    {
-        console.log("could not find a matching category object");
-    }
+    //if the category is valid, run the commodoties API
+    if(category in categories)
+	{
+		getCommodityPrices(eval(category+"Obj"));
+	}
+	else
+	{
+		console.log("category "+category+" is invalid");
+	}
 }
 else
 {
-    console.log("could not find param");
+	console.log("category parameter not set");
 }
-
-
-
 
 // create search bar
 // use the search bar to run through the array selected on the landing page
@@ -168,9 +155,7 @@ else
 // the price should have a color of red if it is in decline
 // the price should have a color of green if it is increasing
 
-
 // business news card
-
 
 // create individual news link cards
 
@@ -184,7 +169,6 @@ else
 const newsContainer = $('.business-news-container');
 const newsAPIKey = "28be02997c3a44bcaf523fdb51d44ec3"
 $(function createNewsContainers(){
-
     var newsQueryURL = "https://newsapi.org/v2/top-headlines?country=au&category=business&apiKey=" + newsAPIKey
     console.log(newsQueryURL);
 
