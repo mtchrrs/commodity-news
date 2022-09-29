@@ -71,7 +71,7 @@ const categories = {
 const comContainer = $('.commodity-prices-card');
 //const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
 const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key
-const comAPIBaseCurrency = "USD";
+const comAPIBaseCurrency = "AUD";
 
 // find the category that is sent over from the previous URL
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -204,3 +204,22 @@ $(function createNewsContainers(){
 
 // in those cards, include an image and description of the news article (depends on what the API will show)
 // when a user clicks on a news link card, take them to a new tab and open the link
+
+// when you click submit, the page is redirected to content.html
+// the url from this page is sent to the other page
+
+
+const compareBtn = $('.submit');
+compareBtn.on('click', function(){
+    //var queryString = document.location.search; 
+    //var category = queryString.split('=')[1];
+    var category = $("#category_select").val();
+    console.log(category);
+    if(category == "none"){
+        location.reload();
+    }
+    
+    var newURL = './content.html?category=' + category;
+    window.open(newURL);
+    //window.location.replace(newURL);
+});
