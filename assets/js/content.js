@@ -204,3 +204,22 @@ $(function createNewsContainers(){
 
 // in those cards, include an image and description of the news article (depends on what the API will show)
 // when a user clicks on a news link card, take them to a new tab and open the link
+
+// when you click submit, the page is redirected to content.html
+// the url from this page is sent to the other page
+
+
+const compareBtn = $('.submit');
+compareBtn.on('click', function(){
+    //var queryString = document.location.search; 
+    //var category = queryString.split('=')[1];
+    var category = $("#category_select").val();
+    console.log(category);
+    if(category == "none"){
+        location.reload();
+    }
+    
+    var newURL = './content.html?category=' + category;
+    window.open(newURL);
+    //window.location.replace(newURL);
+});
