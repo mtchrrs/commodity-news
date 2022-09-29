@@ -7,8 +7,7 @@
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css" integrity="sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH" crossorigin="anonymous">	<link rel="stylesheet" href="../assets/css/style.css">
     <title>Commodities News</title>
 </head>
 <body>
@@ -17,16 +16,31 @@
             <div class="commodity-prices-card commodities">
                 <h3 class="m-3">Commodity Prices</h3>
                 <!-- Search Box from Bootstrap -->
+                <!--
                 <form class="d-flex srch m-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                </form> -->
                 <!-- Commodities and Prices -->
 				<!--
                 <div class="commodity m-2 ">
                     <span class="item">Oil</span> <span class="price">$100</span>
                 </div>
 				-->
+
+                <form>
+                    <select id="category_select" name="Category" id="category">
+                      <option value="none">Select a Category</option>
+                      <option value="currency">Currency</option>
+                      <option value="cryptocurrency">Cryptocurrency</option>
+                      <option value="consumables">Consumables</option>
+                      <option value="metals">Metals</option>
+                      <option value="resources">Resources</option>
+                    </select>
+                    <input class="submit" type="submit" value="Compare"/>
+              </form>
+
+
             </div>
             <div class="business-news-card news">
                 <h1 class="business-news-title">Business News</h1>
