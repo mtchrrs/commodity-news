@@ -1,18 +1,15 @@
-// when you click submit, the page is redirected to content.html
-// the url from this page is sent to the other page
-
-
+// create a constant for the compare button
 const compareBtn = $('.submit');
+// the following line creates a function when the button is clicked
 compareBtn.on('click', function(){
-    //var queryString = document.location.search; 
-    //var category = queryString.split('=')[1];
+    // this variable holds the value selected in the dropdown menu
     var category = $("#category_select").val();
-    console.log(category);
+    // if no category is selected, then the document will reload
     if(category == "none"){
         location.reload();
     }
-    
+    // create a variable to hold the content page URL and the category selected above
     var newURL = './content.html?category=' + category;
-    //window.open(newURL);
+    // send the new URL created above to the current tabs URL to load the next page
     document.location.replace(newURL);
 });

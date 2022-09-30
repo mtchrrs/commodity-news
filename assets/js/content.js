@@ -141,53 +141,57 @@ else
 	console.log("category parameter not set");
 }
 
-// create search bar
-// use the search bar to run through the array selected on the landing page
-// when you type a commodity price in and click search...
-// if the searched name does not match a commodity name
-// inner html of input bar notifies the user that the commodity was not found
-// if it was found the commodity searched raises to the top of the list
-// the other commodities are still listed below
 
-// list 10 commodities + prices
-// pulls 10 commodity names and prices from the API -no order
-// for each commodity, create a div for it to be held in
-// in each div, show the commodity name and the price
-// the price should have a color of red if it is in decline
-// the price should have a color of green if it is increasing
+// create a constant for the compare button
+const compareBtn = $('.submit');
+// the following line creates a function when the button is clicked
+compareBtn.on('click', function(){
+    // this variable holds the value selected in the dropdown menu
+    var category = $("#category_select").val();
+    // if no category is selected, then the document will reload
+    if(category == "none"){
+        location.reload();
+    }
+    // create a variable to hold the content page URL and the category selected above
+    var newURL = './content.html?category=' + category;
+    // send the new URL created above to the current tabs URL to load the next page
+    document.location.replace(newURL);
+});
+
 
 // business news card
-
 // create individual news link cards
 
-// Assuming the layout of HTML is 
-/* 
-<div class="business-news-card">
-    <h1 class="business-news-title">Business News</h1>
-    <div class="business-news-container"></div>
-</div> 
-*/
+// find the container on the html where we want the data to be displayed
 const newsContainer = $('.business-news-container');
-const newsAPIKey = "28be02997c3a44bcaf523fdb51d44ec3"
+// create a variable to hold the API Key
+const newsAPIKey = "596798da2f1a2ffec8641a0a2f3f72b9"
+// the following function pulls the news data from the API and displays it on the screen
 $(function createNewsContainers(){
-    var newsQueryURL = "https://newsapi.org/v2/top-headlines?country=au&category=business&apiKey=" + newsAPIKey
+    // this variable holds the URL to the API and includes the API Key
+    var newsQueryURL = "http://api.mediastack.com/v1/news?access_key=" + newsAPIKey + "&categories=business&countries=au&languages=en&limit=5"
     console.log(newsQueryURL);
-
+    // the fetch function grabs the URL for the API 
     return fetch(newsQueryURL)
     .then(function(response){
         console.log(response);
+        // the return response JSON returns the data into the application, ready to be pulled and displayed
         return response.json();
     })
     .then(function(result){
+        // the for loop creates 5 of the news articles and presents then onto the screen
         for(let i=0; i<=5; i++){
             console.log(result);
-            let image = result.articles[i].urlToImage;
-            let title = result.articles[i].title;
-            let description = result.articles[i].description;
-            let link = result.articles[i].url; 
-            
+            // the following lines pull the information from the json to easily access though a local variable
+            let image = result.data[i].image;
+            let title = result.data[i].title;
+            let description = result.data[i].description;
+            let link = result.data[i].url; 
+            // the next line creates a div for the data
             var article = document.createElement("div");
+            // and adds the following class to the div
             article.classList.add("articles-class");
+            // this will create the article and display it in the html with the corresponding values
             article.innerHTML = `
             <div class="article-image-container">
             <img src="${image}" class="article-image" alt="${title}">
@@ -196,31 +200,9 @@ $(function createNewsContainers(){
             <a href="${link}" title="Go to the website" target="_blank class="article-title">${title}
             <h3 class="article-description">${description}
             </div>`
-
+            // this will append the article div to the pre-existing html
             newsContainer.append(article);
         };
         
     });
-});
-
-// in those cards, include an image and description of the news article (depends on what the API will show)
-// when a user clicks on a news link card, take them to a new tab and open the link
-
-// when you click submit, the page is redirected to content.html
-// the url from this page is sent to the other page
-
-
-const compareBtn = $('.submit');
-compareBtn.on('click', function(){
-    //var queryString = document.location.search; 
-    //var category = queryString.split('=')[1];
-    var category = $("#category_select").val();
-    console.log(category);
-    if(category == "none"){
-        location.reload();
-    }
-    
-    var newURL = './content.html?category=' + category;
-    window.open(newURL);
-    //window.location.replace(newURL);
 });
