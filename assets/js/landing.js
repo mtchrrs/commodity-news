@@ -13,6 +13,6 @@ compareBtn.on('click', function(){
     }
     
     var newURL = './content.html?category=' + category;
-    window.open(newURL);
-    //document.location.replace(newURL);
+    //window.open(newURL);
+    document.location.replace(newURL);
 });
