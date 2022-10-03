@@ -140,22 +140,39 @@ else
 	console.log("category parameter not set");
 }
 
-
-// create a constant for the compare button
-const compareBtn = $('.submit');
-// the following line creates a function when the button is clicked
-compareBtn.on('click', function(){
-    // this variable holds the value selected in the dropdown menu
-    var category = $("#category_select").val();
-    // if no category is selected, then the document will reload
+//reload the page to search the commodities API based on the selected category
+function reloadPageBasedOnCommodity()
+{
+    //read the value commodity category selected
+    var category = $("#categorySelect").val();
+    //create the new URL
     if(category == "none"){
         location.reload();
     }
-    // create a variable to hold the content page URL and the category selected above
     var newURL = './content.html?category=' + category;
-    // send the new URL created above to the current tabs URL to load the next page
-    document.location.replace(newURL);
-});
+    //reload the page with new URL
+    //window.open(newURL);
+    window.location.replace(newURL);
+}
+
+var category = getUrlParameter("category");
+//console.log(category+"Obj")
+if(category){
+    //if the category is valid, run the commodoties API
+    if(category in categories){
+        //set the commodity category drop down list to match the url param value in Jquery
+        $("#categorySelect").val(category);
+        //the above is shorthand for javascripts document.getElementById("categorySelect").value()
+        getCommodityPrices(eval(category+"Obj"));
+    }
+    else{
+        console.log("category "+category+" is invalid");
+    }
+}
+else{
+    console.log("category parameter not set");
+}
+
 
 
 // business news card

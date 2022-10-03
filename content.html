@@ -16,7 +16,15 @@
             <div class="commodity-prices-card commodities">
                 <h3 class="m-3">Commodity Prices</h3>
                 <p>The 'price' provided represents how much 1AUD is worth of the dollar value (AUD) of the commodity</p>
-                <form action="javascript:void(0)">
+                <select id="categorySelect" class="form-select items" aria-label="Default select example" onchange="reloadPageBasedOnCommodity();">              
+                    <option value="none">Select a Category</option>
+                    <option value="currency">Currency</option>
+                    <option value="cryptocurrency">Cryptocurrency</option>
+                    <option value="consumables">Consumables</option>
+                    <option value="metals">Metals</option>
+                    <option value="resources">Resources</option>
+                </select>
+                <!-- <form action="javascript:void(0)">
                     <select id="category_select" name="Category" id="category">
                       <option value="none">Select a Category</option>
                       <option value="currency">Currency</option>
@@ -26,7 +34,7 @@
                       <option value="resources">Resources</option>
                     </select>
                     <input class="submit" type="submit" value="Compare"/>
-              </form>
+              </form> -->
 
 
             </div>
