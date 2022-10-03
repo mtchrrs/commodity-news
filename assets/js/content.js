@@ -121,40 +121,6 @@ function getCommodityPrices(categoryObj)
 	});
 }
 
-//get the category paramater if set
-var category = getUrlParameter("category");
-if(category)
-{
-    //if the category is valid, run the commodoties API
-    if(category in categories)
-	{
-		getCommodityPrices(eval(category+"Obj"));
-	}
-	else
-	{
-		console.log("category "+category+" is invalid");
-	}
-}
-else
-{
-	console.log("category parameter not set");
-}
-
-//reload the page to search the commodities API based on the selected category
-function reloadPageBasedOnCommodity()
-{
-    //read the value commodity category selected
-    var category = $("#categorySelect").val();
-    //create the new URL
-    if(category == "none"){
-        location.reload();
-    }
-    var newURL = './content.html?category=' + category;
-    //reload the page with new URL
-    //window.open(newURL);
-    window.location.replace(newURL);
-}
-
 var category = getUrlParameter("category");
 //console.log(category+"Obj")
 if(category){
@@ -172,6 +138,22 @@ if(category){
 else{
     console.log("category parameter not set");
 }
+
+//reload the page to search the commodities API based on the selected category
+function reloadPageBasedOnCommodity()
+{
+    //read the value commodity category selected
+    var category = $("#categorySelect").val();
+    //create the new URL
+    if(category == "none"){
+        location.reload();
+    }
+    var newURL = './content.html?category=' + category;
+    //reload the page with new URL
+    //window.open(newURL);
+    window.location.replace(newURL);
+}
+
 
 
 
