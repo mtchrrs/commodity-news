@@ -60,10 +60,26 @@ const categories = {
     "metals":"",
     "resources":"",
 }
+
+//reload the page to search the commodities API based on the selected category
+function reloadPageBasedOnCommodity()
+{
+    //read the value commodity category selected
+    var category = $("#categorySelect").val();
+    //create the new URL
+    if(category == "none"){
+        location.reload();
+    }
+    var newURL = './content.html?category=' + category;
+    //reload the page with new URL
+    //window.open(newURL);
+    window.location.replace(newURL);
+}
+
 //commodity prices card
 const comContainer = $('.commodity-prices-card');
-//const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
-const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key
+const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";
+//const comAPIKey = "5pj0h95a9jmdih51dzywtxwvbi7y3r4optdpz1t3tw7q431jab0f62273p7s"; //this is the new key
 const comAPIBaseCurrency = "USD";
 // find the category that is sent over from the previous URL
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -89,8 +105,14 @@ function getCommodityPrices(categoryObj)
     .then((response) => response.json()) //decode the JSON response
     .then(function(data){ //process the data
         //for each item in our category, attempt to lookup the correspoding price in the commodities API response
-        console.log("this is the API response");
-        console.log(data);
+        //console.log(data);
+        //check that we received a successful response from the API
+        if(data.data.success==false)
+        {
+            //log the error message to console and return false
+            console.log("ERROR - "+data.data.error.info);
+            return false;
+        }
         for(const item in categoryObj)
         {
             //if we find a match
@@ -110,23 +132,38 @@ function getCommodityPrices(categoryObj)
 }
 //get the category paramater if set
 var category = getUrlParameter("category");
-if(category)
-{
+//console.log(category+"Obj")
+if(category){
     //if the category is valid, run the commodoties API
-    if(category in categories)
-    {
+    if(category in categories){
+        //set the commodity category drop down list to match the url param value in Jquery
+        $("#categorySelect").val(category);
+        //the above is shorthand for javascripts document.getElementById("categorySelect").value()
         getCommodityPrices(eval(category+"Obj"));
     }
-    else
-    {
+    else{
         console.log("category "+category+" is invalid");
     }
 }
-else
-{
+else{
     console.log("category parameter not set");
 }
 // create search bar
+
+const compareBtn = $('.submit');
+compareBtn.on('click', function(){
+    //var queryString = document.location.search;
+    //var category = queryString.split('=')[1];
+    var category = $("#category_select").val();
+    //console.log(category);
+    if(category == "none"){
+        location.reload();
+    }
+    var newURL = window.location.pathname + '?category=' + category;
+    // window.open(newURL);
+    window.location.replace(newURL);
+});
+
 // use the search bar to run through the array selected on the landing page
 // when you type a commodity price in and click search...
 // if the searched name does not match a commodity name

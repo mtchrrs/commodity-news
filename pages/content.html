@@ -20,16 +20,20 @@
                 <!--form class="d-flex srch m-3" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button=-->
-                 <select class="form-select items" aria-label="Default select example">
-                    <option selected>Select a Commodity Here</option>
-                    <option value="1">Petrol</option>
-                    <option value="2">Oil</option>
-                    <option value="3">Coffee</option>
+                 <select id="categorySelect" class="form-select items" aria-label="Default select example" onchange="reloadPageBasedOnCommodity();">              
+                    <option value="none">Select a Category</option>
+                    <option value="currency">Currency</option>
+                    <option value="cryptocurrency">Cryptocurrency</option>
+                    <option value="consumables">Consumables</option>
+                    <option value="metals">Metals</option>
+                    <option value="resources">Resources</option>
                 </select>
 
-                <div class="compare text-center">
+                <!--
+                    <div class="compare text-center">
                     <button id="compare" class="text-center"><a href="CommoditiesNews.html">Compare</a></button>
                 </div>
+                -->
                 <!-- Commodities and Prices -->
 				<!--
                 <div class="commodity m-2 ">
