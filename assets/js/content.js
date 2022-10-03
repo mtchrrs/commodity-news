@@ -27,7 +27,6 @@ const cryptocurrencyObj = {
 const consumablesObj = {
     RICE: "RICE",
     COFFEE: "ARABICA COFFEE",
-    ROBUSTA: "ROBUSTA COFFEE",
     CSCU22: "CHEESE",
     COCOA: "COCOA",
     CORN: "CORN",
@@ -43,7 +42,7 @@ const metalsObj = {
     ALU: "ALUMINIUM",
     IRD: "IRIDIUM (TROY OUNCE)",
     NI: "NICKEL",
-    XPD: "PALLADIUM (TROY OUNCE)",
+    XPD: "PALLADIUM",
 }
 
 // resources
@@ -55,7 +54,6 @@ const resourcesObj = {
     COAL: "COAL",
     ETHANOL: "ETHANOL",
     LUMBER: "LUMBER",
-    LCAT: "LIVE CATTLE",
 }
 
 //list of valid categories
@@ -71,7 +69,8 @@ const categories = {
 const comContainer = $('.commodity-prices-card');
 //const comAPIKey = "5i3439mr3qzg7beo14kvb7wfvneh2jgduglakzo3fv86l6480m4t701hh1c1";  //this is the old key, max number of requests per month reached
 //const comAPIKey = "f3tsk69begcgm86joa1f1gk94403e89bshgj11m1ja255966xz6mwtjzt6t4"; //this is the new key, max number of requests per month reached
-const comAPIKey = "pvbbfl57hthgd102chp2njje681xzw650igd4ct0ozpc2y1cnvwxn7c28so3"
+//const comAPIKey = "pvbbfl57hthgd102chp2njje681xzw650igd4ct0ozpc2y1cnvwxn7c28so3"
+const comAPIKey = "ybxoombge7m6bnzqhb1vny4or1s98u4x31uk4cewrx64bj7l042wr624pvb9"
 const comAPIBaseCurrency = "AUD";
 
 // find the category that is sent over from the previous URL
@@ -109,13 +108,13 @@ function getCommodityPrices(categoryObj)
 			if(item in data.data.rates)
 			{
 				//calculate the $ value by dividing by 1
-				var itemValue = (data.data.rates[item]/1).toFixed(10);
+				var itemValue = (data.data.rates[item]).toFixed(6);
 				//console.log(item+" - "+categoryObj[item]+": "+itemValue+" "+comAPIBaseCurrency);
 				
 				//display the price on the commodity prices card
 				var newCommodity = $("<div></div>").addClass("commodity m-2");
 				newCommodity.append($("<span>"+categoryObj[item]+"</span>").addClass("item"));
-				newCommodity.append($("<span>$"+itemValue+" "+comAPIBaseCurrency+"</span>").addClass("price"));
+				newCommodity.append($("<span>$"+itemValue +"</span>").addClass("price"));
 				comContainer.append(newCommodity);
 			}
 		}
